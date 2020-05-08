@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-slave:latest
+FROM jenkins/inbound-agent:latest
 
 ARG packer_version=1.5.4
 
