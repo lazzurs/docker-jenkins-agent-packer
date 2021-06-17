@@ -1,6 +1,6 @@
 FROM jenkins/inbound-agent:latest
 
-ARG packer_version=1.7.2
+ARG packer_version=1.7.3
 
 # Switch to root
 USER root
