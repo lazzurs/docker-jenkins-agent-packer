@@ -22,6 +22,11 @@ RUN apt -y install wget unzip
 RUN wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 RUN unzip packer_${packer_version}_linux_amd64.zip -d /usr/local/bin/
 
+# Install awscli
+RUN wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+RUN unzip awscli-exe-linux-x86_64.zip
+RUN ./aws/install
+
 # Switch back to the jenkins user.
 
 USER jenkins
