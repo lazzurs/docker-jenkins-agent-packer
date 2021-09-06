@@ -36,5 +36,5 @@ jobs:
         docker tag ghcr.io/lazzurs/jenkins-agent-packer:${{env.TODAY}} lazzurs/jenkins-agent-packer:latest
         docker tag ghcr.io/lazzurs/jenkins-agent-packer:${{env.TODAY}} lazzurs/jenkins-agent-packer:${{env.TODAY}}
         docker push lazzurs/jenkins-agent-packer:${{env.TODAY}}
-        docker push ghcr.io/lazzurs/jenkins-agent-packer:latest
+        docker push lazzurs/jenkins-agent-packer:latest
 
