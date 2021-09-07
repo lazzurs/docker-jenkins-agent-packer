@@ -18,7 +18,7 @@ RUN apt update
 RUN apt -y install ansible-base
 
 # Install Packer
-RUN apt -y install wget unzip
+RUN apt -y install wget unzip curl
 RUN wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 RUN unzip packer_${packer_version}_linux_amd64.zip -d /usr/local/bin/
 
