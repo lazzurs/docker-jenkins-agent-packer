@@ -12,10 +12,7 @@ RUN apt update && apt -y upgrade
 RUN apt -y install gnupg2
 
 # Install Ansible
-RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu focal main" > /etc/apt/sources.list.d/ansible.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
-RUN apt update
-RUN apt -y install ansible-base
+RUN apt -y install ansible
 
 # Install Packer
 RUN apt -y install wget unzip curl
