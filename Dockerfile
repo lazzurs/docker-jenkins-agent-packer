@@ -14,8 +14,8 @@ RUN apt -y install gnupg2
 # Install Ansible
 RUN apt -y install ansible
 
-# Install Packer
-RUN apt -y install wget unzip curl
+# Install Packer (jq for parsing manifest files)
+RUN apt -y install wget unzip curl jq
 RUN wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 RUN unzip packer_${packer_version}_linux_amd64.zip -d /usr/local/bin/
 
