@@ -8,6 +8,7 @@ USER root
 
 # Testing arch output
 RUN echo ${ARCH}
+RUN uname -m
 
 # Update system
 RUN apt update && apt -y upgrade
