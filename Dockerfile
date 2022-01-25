@@ -1,3 +1,4 @@
+ARG ARCH=
 FROM jenkins/inbound-agent:latest
 
 ARG packer_version=1.7.9
@@ -16,17 +17,17 @@ RUN apt -y install ansible
 
 # Install Packer (jq for parsing manifest files)
 RUN apt -y install wget unzip curl jq
-RUN wget https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
-RUN unzip packer_${packer_version}_linux_amd64.zip -d /usr/local/bin/
+RUN curl https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_${ARCH}.zip -o packer.zip
+RUN unzip packer.zip -d /usr/local/bin/
 
 # Install awscli
-RUN wget https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-RUN unzip awscli-exe-linux-x86_64.zip
+RUN if [ ${ARCH} = "amd64" ]; then curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; elif [ ${ARCH} = "arm64" ]; then curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"; fi
+RUN unzip awscliv2.zip
 RUN ./aws/install
 
 # Install AWS Session Manager plugin
 
-RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+RUN if [ ${ARCH} = "amd64" ]; then curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"; elif [ ${ARCH} = "arm64" ]; then curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin.deb"; fi
 RUN dpkg -i session-manager-plugin.deb
 
 # Switch back to the jenkins user.
