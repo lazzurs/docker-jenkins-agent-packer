@@ -6,6 +6,9 @@ ARG packer_version=1.7.9
 # Switch to root
 USER root
 
+# Testing arch output
+RUN echo ${ARCH}
+
 # Update system
 RUN apt update && apt -y upgrade
 
