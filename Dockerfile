@@ -14,6 +14,9 @@ RUN apt -y install gnupg2
 # Install Ansible
 RUN apt -y install ansible
 
+# Install Rsync to allow use of ansible.posix.synchronise
+RUN apt -y install rsync
+
 # Install Packer (jq for parsing manifest files)
 RUN apt -y install wget unzip curl jq
 RUN if [ $(uname -m) = "x86_64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip" -o "packer.zip"; elif [ $(uname -m) = "aarch64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_arm64.zip" -o "packer.zip"; fi
