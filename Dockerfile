@@ -11,9 +11,9 @@ RUN apt update && apt -y upgrade
 # Add the ability to use PPAs
 RUN apt -y install gnupg2
 
-# Install latest Ansible using pip
+# Install latest Ansible + pywinrm using pip
 RUN apt -y install pip
-RUN pip install ansible
+RUN pip install ansible pywinrm
 
 # Install Rsync to allow use of ansible.posix.synchronise
 RUN apt -y install rsync
