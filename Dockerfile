@@ -14,10 +14,12 @@ USER root
 # jq: parse json files
 RUN apt-get update \
  && apt-get -y upgrade \
- && apt-get -y install --no-install-recommends gnupg2 pip rsync curl unzip jq \
+ && apt-get -y install --no-install-recommends gnupg2 pip rsync curl unzip jq locales \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
 # Install latest Ansible + pywinrm using pip
 RUN pip install --no-cache-dir ansible pywinrm
 
@@ -25,7 +27,7 @@ RUN pip install --no-cache-dir ansible pywinrm
 RUN if [ "$(uname -m)" = "x86_64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip" -o "packer.zip"; elif [ "$(uname -m)" = "aarch64" ]; then curl "https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_arm64.zip" -o "packer.zip"; fi && unzip packer.zip -d /usr/local/bin/
 
 # Install awscli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install && rm awscliv2.zip && rm -rf awsclipv2
 
 # Install AWS Session Manager plugin
 RUN if [ "$(uname -m)" = "x86_64" ]; then curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"; elif [ "$(uname -m)" = "aarch64" ]; then curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin.deb"; fi && dpkg -i session-manager-plugin.deb
