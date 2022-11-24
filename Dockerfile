@@ -18,6 +18,8 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+ENV LC_ALL C.UTF-8
+
 # Install latest Ansible + pywinrm using pip
 RUN pip install --no-cache-dir ansible pywinrm
 
