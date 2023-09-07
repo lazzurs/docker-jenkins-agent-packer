@@ -14,7 +14,7 @@ USER root
 # jq: parse json files
 RUN apt-get update \
  && apt-get -y upgrade \
- && apt-get -y install --no-install-recommends gnupg2 pip rsync curl unzip jq openssh-client \
+ && apt-get -y install --no-install-recommends gnupg2 pip rsync curl unzip jq sshpass \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
